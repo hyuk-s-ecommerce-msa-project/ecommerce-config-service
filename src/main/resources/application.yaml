@@ -1,0 +1,14 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+  config:
+    import: "optional:file:.env[.properties]"
+  cloud:
+    config:
+      server:
+        git: #default
+          uri: file://C:\\Users\\Hyuk\\Desktop\\Project\\Web\\springboot-cloud\\ecommerce\\git-local-repo
+          default-label: main
