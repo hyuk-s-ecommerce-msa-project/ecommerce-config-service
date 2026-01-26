@@ -1,16 +1,26 @@
 server:
   port: 8888
 
+encrypt:
+  key-store:
+    location: file:///C:/Users/Hyuk/Desktop/Project/Web/springboot-cloud/ecommerce/keystore/apiEncryptionKey.jks
+    password: ${KEYSTORE_PASSWORD}
+    alias: apiEncryptionKey
+    secret: ${KEY_PASSWORD}
+
 spring:
   application:
     name: config-service
-  config:
-    import: "optional:file:.env[.properties]"
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+  profiles:
+    active: git
   cloud:
     config:
       server:
         git: #default
-          uri: file://C:\\Users\\Hyuk\\Desktop\\Project\\Web\\springboot-cloud\\ecommerce\\git-local-repo
+          uri: https://github.com/hyuk-s-ecommerce-msa-project/ecommerce-config-repository
           default-label: main
 
 management:
@@ -21,3 +31,4 @@ management:
           - health
           - beans
           - info
+          - busrefresh
