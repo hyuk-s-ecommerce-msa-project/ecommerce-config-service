@@ -3,7 +3,7 @@ server:
 
 encrypt:
   key-store:
-    location: file:///C:/Users/Hyuk/Desktop/Project/Web/springboot-cloud/ecommerce/keystore/apiEncryptionKey.jks
+    location: file:/apiEncryptionKey.jks
     password: ${KEYSTORE_PASSWORD}
     alias: apiEncryptionKey
     secret: ${KEY_PASSWORD}
