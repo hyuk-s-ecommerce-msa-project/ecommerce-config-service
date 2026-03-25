@@ -1,25 +1,15 @@
 server:
   port: 9088
 
-encrypt:
-  key-store:
-    location: file:/app/apiEncryptionKey.jks
-    password: ${KEYSTORE_PASSWORD}
-    alias: apiEncryptionKey
-    secret: ${KEY_PASSWORD}
-
 spring:
   application:
     name: config-service
-  rabbitmq:
-    host: rabbitmq-devops
-    port: 5672
   profiles:
-    active: git
+    active: git,dev
   cloud:
     config:
       server:
-        git: #default
+        git:
           uri: https://github.com/hyuk-s-ecommerce-msa-project/ecommerce-config-repository
           default-label: main
 
@@ -32,3 +22,39 @@ management:
           - beans
           - info
           - busrefresh
+
+---
+# [dev 설정 섹션 - 로컬 인텔리제이용]
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+encrypt:
+  key-store:
+    location: file:./app/apiEncryptionKey.jks
+    password: ${KEYSTORE_PASSWORD}
+    alias: apiEncryptionKey
+    secret: ${KEY_PASSWORD}
+
+rabbitmq:
+  host: localhost
+  port: 5672
+
+---
+# [prod 설정 섹션 - Azure 배포용]
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+encrypt:
+  key-store:
+    location: file:/app/apiEncryptionKey.jks # 리눅스 컨테이너 내부 절대 경로
+    password: ${KEYSTORE_PASSWORD}
+    alias: apiEncryptionKey
+    secret: ${KEY_PASSWORD}
+
+rabbitmq:
+  host: rabbitmq-devops # 도커 네트워크 내부 이름
+  port: 5672
