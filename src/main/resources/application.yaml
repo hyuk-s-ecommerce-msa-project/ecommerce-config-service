@@ -3,7 +3,7 @@ server:
 
 encrypt:
   key-store:
-    location: file:/apiEncryptionKey.jks
+    location: file:/app/apiEncryptionKey.jks
     password: ${KEYSTORE_PASSWORD}
     alias: apiEncryptionKey
     secret: ${KEY_PASSWORD}
@@ -12,7 +12,7 @@ spring:
   application:
     name: config-service
   rabbitmq:
-    host: 127.0.0.1
+    host: rabbitmq-devops
     port: 5672
   profiles:
     active: git
